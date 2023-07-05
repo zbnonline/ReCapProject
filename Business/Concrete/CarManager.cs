@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,17 @@ namespace Business.Concrete
                 Console.WriteLine("Fiyat 0'dan büyük olmalıdır");
             }
 
+            if (car.CarName.Length <= 2)
+            {
+                Console.WriteLine("Araba adı minimum 2 karakter olmalıdır");
+            }
+
             _carDal.Add(car);
+        }
+
+        public List<CarDetailDto> CarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
 
         public List<Car> GetAll()
@@ -33,19 +44,19 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public Car GetById(int id)
+        public Car GetById(int carId)
         {
-            return _carDal.Get(c => c.Id == id);
+            return _carDal.Get(c => c.CarId == carId);
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetAll(c => c.BrandId == id);
+            return _carDal.GetAll(c => c.BrandId == brandId);
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public List<Car> GetCarsByColorId(int colorId)
         {
-            return _carDal.GetAll(c => c.ColorId == id);
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
     }
 }
