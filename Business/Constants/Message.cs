@@ -27,5 +27,8 @@ namespace Business.Constants
         public static string UpdatedColor = "Renk güncellendi.";
         public static string DeletedColor = "Renk silindi.";
         public static string ColorNameInValid = "Renk adı en az iki karakterden oluşmalı";
+
+        // ************* RENTAL MESSAGES **************//
+        public static string CarNotReturn = "İstediğiniz araç henüz teslim edilmemiş";
     }
 }
