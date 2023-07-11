@@ -28,7 +28,8 @@ namespace Business.Concrete
 
         public IResult Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Delete(customer);
+            return new SuccessResult();
         }
 
         public IDataResult<List<Customer>> GetAll()
@@ -38,12 +39,13 @@ namespace Business.Concrete
 
         public IDataResult<Customer> GetById(int customerId)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == customerId));
         }
 
         public IResult Update(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Update(customer);
+            return new SuccessResult();
         }
     }
 }
