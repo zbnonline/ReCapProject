@@ -64,18 +64,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
-            if (car.DailyPrice < 0)
-            {
-                return new ErrorResult(Message.CarPriceIsNegative);
-            }
-
-            if (car.CarName.Length <= 2)
-            {
-                return new ErrorResult(Message.CarNameInValid);
-            }
-
             _carDal.Update(car);
 
             return new SuccessResult(Message.UpdatedCar);
