@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -24,26 +27,45 @@ namespace Business.Concrete
             _fileHelper = fileHelper;
         }
 
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
+            IResult result = BusinessRules.Run(
+                CheckIfCarImagesCarLimit(carImage.CarId)
+                );
+
+            if (result != null)
+            {
+                return result;
+            }
+
             carImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesPath);
             carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
-            return new SuccessResult();
+            return new SuccessResult(Message.CarImagesAdded);
         }
 
         public IResult Update(IFormFile file, CarImage carImage)
         {
+            IResult result = BusinessRules.Run(
+                CheckIfCarImagesCarLimit(carImage.CarId)
+                );
+
+            if (result != null)
+            {
+                return result;
+            }
+
             carImage.ImagePath = _fileHelper.Update(file, PathConstants.ImagesPath + carImage.ImagePath, PathConstants.ImagesPath);
             _carImageDal.Update(carImage);
-            return new SuccessResult();
+            return new SuccessResult(Message.CarImagesUpdated);
         }
 
         public IResult Delete(CarImage carImage)
         {
             _fileHelper.Delete(PathConstants.ImagesPath + carImage.ImagePath);
             _carImageDal.Delete(carImage);
-            return new SuccessResult();
+            return new SuccessResult(Message.CarImagesDeleted);
         }
 
         public IDataResult<List<CarImage>> GetAll()
@@ -59,6 +81,16 @@ namespace Business.Concrete
         public IDataResult<List<CarImage>> GetByCarId(int carId)
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
+        }
+
+        private IResult CheckIfCarImagesCarLimit(int carId)
+        {
+            var result = _carImageDal.GetAll(c => c.CarId == carId);
+            if (result.Count >= 5)
+            {
+                return new ErrorResult(Message.CheckIfCarImagesCarLimit);
+            }
+            return new SuccessResult();
         }
     }
 }

@@ -69,12 +69,12 @@ namespace ConsoleUI
         {
             UserManager userManager = new UserManager(new EfUserDal());
 
-            var result = userManager.GetAll();
+            //var result = userManager.GetAll();
 
-            foreach (var user in result.Data)
-            {
-                Console.WriteLine(user.FirstName + " " + user.LastName);
-            }
+            //foreach (var user in result.Data)
+            //{
+            //    Console.WriteLine(user.FirstName + " " + user.LastName);
+            //}
         }
 
         private static void DeleteCar()

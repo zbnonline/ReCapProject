@@ -15,12 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{B8332A66-D931-4C88-B925-83F5234CB815}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wwwroot", "wwwroot", "{B07C5BE6-643D-41A3-A41D-9AADFEBE988C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uploads", "Uploads", "{BA4BA973-2AE4-479F-98EE-BF5A9767BE28}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{4B5451A9-BF6C-4067-8DCC-4B88AD9C4CEA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,10 +48,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{BA4BA973-2AE4-479F-98EE-BF5A9767BE28} = {B07C5BE6-643D-41A3-A41D-9AADFEBE988C}
-		{4B5451A9-BF6C-4067-8DCC-4B88AD9C4CEA} = {BA4BA973-2AE4-479F-98EE-BF5A9767BE28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F31BC30-8316-420D-BBBB-ABB1F8CD2B53}

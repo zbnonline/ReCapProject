@@ -1,9 +1,11 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.IoC;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -32,20 +34,9 @@ namespace WebAPI
         {
 
             services.AddControllers();
-            //services.AddSingleton<ICarService, CarManager>();
-            //services.AddSingleton<IColorService, ColorManager>();
-            //services.AddSingleton<IBrandService, BrandManager>();
-            //services.AddSingleton<IUserService, UserManager>();
-            //services.AddSingleton<ICustomerService, CustomerManager>();
-            //services.AddSingleton<IRentalService, RentalManager>();
-
-
-            //services.AddSingleton<ICarDal, EfCarDal>();
-            //services.AddSingleton<IColorDal, EfColorDal>();
-            //services.AddSingleton<IBrandDal, EfBrandDal>();
-            //services.AddSingleton<IUserDal, EfUserDal>();
-            //services.AddSingleton<ICustomerDal, EfCustomerDal>();
-            //services.AddSingleton<IRentalDal, EfRentalDal>();
+            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            ServiceTool.Create(services);
 
             services.AddSwaggerGen(c =>
             {
